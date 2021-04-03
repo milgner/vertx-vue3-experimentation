@@ -65,7 +65,6 @@ tasks.register<NpxTask>("buildFrontEnd") {
   args.set(listOf("build", "--mode", "production"))
 }
 
-
 tasks.named("build") {
   dependsOn("buildFrontEnd")
 }
@@ -95,17 +94,4 @@ tasks.withType<Test> {
 
 tasks.withType<JavaExec> {
   args = listOf("run", mainVerticleName, "--redeploy=$watchForChange", "--launcher-class=$launcherClassName", "--on-redeploy=$doOnChange")
-}
-
-//configure<org.gradle.jvm.tasks.Jar>("jar") {
-//  doLast {
-//    println("HENLO!!")
-//  }
-//  from("build/webapp-ep2/") {
-//    into("public")
-//  }
-//}
-
-inline fun <reified C> Project.configure(name: String, configuration: C.() -> Unit) {
-  (this.tasks.getByName(name) as C).configuration()
 }
