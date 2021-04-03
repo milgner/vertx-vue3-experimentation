@@ -69,8 +69,13 @@ tasks.register<NpxTask>("buildFrontEnd") {
 tasks.named("build") {
   dependsOn("buildFrontEnd")
 }
+
 tasks.named("assemble") {
   dependsOn("buildFrontEnd")
+}
+
+tasks.named("run") {
+  dependsOn("build")
 }
 
 tasks.withType<ShadowJar> {
