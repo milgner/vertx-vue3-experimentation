@@ -52,20 +52,17 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 
 node {
-  nodeProjectDir.set(file("src/webapp-ep2"))
+  nodeProjectDir.set(file("src/webapp"))
   npmInstallCommand.set(if (getenv("CI") != null) { "ci" } else { "install" })
   download.set(false)
 }
 
 tasks.register<NpxTask>("buildFrontEnd") {
   dependsOn("npmInstall")
-  inputs.files(fileTree("src/webapp-ep2/src"))
-  outputs.dir("build/webapp-ep2")
+  inputs.files(fileTree("src/webapp/src"))
+  outputs.dir("build/resources/main/webapp")
   command.set("vite")
   args.set(listOf("build", "--mode", "production"))
-  doLast {
-    println("FRONTEND")
-  }
 }
 
 
